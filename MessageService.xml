@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MessageService</name>
+    </assembly>
+    <members>
+        <member name="M:MessageService.Controllers.WeatherForecastController.GetNewForecasts(System.Int32)">
+            <summary>
+            Возвращает рандомные прогнозы
+            </summary>
+            <returns>Рандомный прогноз</returns>
+        </member>
+        <member name="M:MessageService.Controllers.WeatherForecastController.GetNotFoundForecasts(System.Int32)">
+            <summary>
+            Возвращает ненайденные прогнозы
+            </summary>
+            <returns>Рандомный прогноз</returns>
+        </member>
+        <member name="M:MessageService.Controllers.WeatherForecastController.GetBadForecasts(System.Int32)">
+            <summary>
+            Возвращает плохие прогнозы
+            </summary>
+            <returns>Рандомный прогноз</returns>
+        </member>
+        <member name="M:MessageService.Controllers.WeatherForecastController.GetArchiveForecasts(MessageService.Controllers.GetArchiveForecastsRequest)">
+            <summary>
+            Возвращает рандомные прогнозы
+            </summary>
+            <returns>Рандомный прогноз</returns>
+        </member>
+        <member name="T:MessageService.Repositories.WeatherRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.WeatherRepository.GetRandomWeatherForecast">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

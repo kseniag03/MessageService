@@ -1,0 +1,458 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MessageService</name>
+    </assembly>
+    <members>
+        <member name="T:MessageService.Controllers.MessageController">
+            <summary>
+            Класс обработчика сообщений.
+            </summary>
+        </member>
+        <member name="F:MessageService.Controllers.MessageController._baseCount">
+            <summary>
+            Максимальное число пользователей для инициализации.
+            </summary>
+        </member>
+        <member name="F:MessageService.Controllers.MessageController._messageRepository">
+            <summary>
+            Хранилище данных пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Controllers.MessageController.#ctor(MessageService.Repositories.IMessageRepository)">
+            <summary>
+            Конструктор обработчика сообщений.
+            </summary>
+            <param name="messageRepository"> Хранилище данных сообщений </param>
+        </member>
+        <member name="M:MessageService.Controllers.MessageController.GetNewUsers">
+            <summary>
+            Инициализация списка сообщений
+            </summary>
+            <returns> Результат запроса </returns>
+        </member>
+        <member name="M:MessageService.Controllers.MessageController.GetMessagesListBySenderAndReceiverEmail(System.String,System.String)">
+            <summary>
+            Получение списка сообщений по идентификатору отправителя и получателя.
+            </summary>
+            <param name="senderId"> Идентификатору отправителя </param>
+            <param name="receiverId"> Идентификатору получателя </param>
+            <returns> Список сообщений </returns>
+        </member>
+        <member name="M:MessageService.Controllers.MessageController.GetMessagesListBySenderEmail(System.String)">
+            <summary>
+            Получение списка сообщений по идентификатору отправителя.
+            </summary>
+            <param name="senderId"> Идентификатору отправителя </param>
+            <returns> Список сообщений </returns>
+        </member>
+        <member name="M:MessageService.Controllers.MessageController.GetMessagesListByReceiverEmail(System.String)">
+            <summary>
+            Получение списка сообщений по идентификатору получателя.
+            </summary>
+            <param name="receiverId"> Идентификатору получателя </param>
+            <returns> Список сообщений </returns>
+        </member>
+        <member name="M:MessageService.Controllers.MessageController.Post(MessageService.Text)">
+            <summary>
+            Добавление информации о новом сообщении, 
+            если отправитель и получатель сообщения – зарегистрированные пользователи.
+            </summary>
+            <param name="message"> Новое сообщение </param>
+            <returns> Сообщение, которое добавляется к имеющемуся списку, если выполнено условие </returns>
+        </member>
+        <member name="T:MessageService.Controllers.UserController">
+            <summary>
+            Класс обработчика пользователей.
+            </summary>
+        </member>
+        <member name="F:MessageService.Controllers.UserController._baseCount">
+            <summary>
+            Максимальное число пользователей для инициализации.
+            </summary>
+        </member>
+        <member name="F:MessageService.Controllers.UserController._userRepository">
+            <summary>
+            Хранилище данных пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Controllers.UserController.#ctor(MessageService.Repositories.IUserRepository)">
+            <summary>
+            Конструктор обработчика пользователей.
+            </summary>
+            <param name="userRepository"> Хранилище данных пользователей </param>
+        </member>
+        <member name="M:MessageService.Controllers.UserController.GetNewUsers">
+            <summary>
+            Инициализация списка пользователей
+            </summary>
+            <returns> Результат запроса </returns>
+        </member>
+        <member name="M:MessageService.Controllers.UserController.GetUserByEmail(System.String)">
+            <summary>
+            Получение пользователя по уникальному email.
+            </summary>
+            <param name="email"> Идентификатор пользователя </param>
+            <returns> Информация о пользователе </returns>
+        </member>
+        <member name="M:MessageService.Controllers.UserController.GetUsersList">
+            <summary>
+            Получение списка всех пользователей.
+            </summary>
+            <returns> Список пользователей </returns>
+        </member>
+        <member name="M:MessageService.Controllers.UserController.GetNewUsers(System.Int32)">
+            <summary>
+            Регистрация новых пользователей
+            </summary>
+            <param name="count"> Кол-во добавляемых пользователей (не более 100) </param>
+            <returns> Список новых пользователей, который добавляется к имеющемуся списку </returns>
+        </member>
+        <member name="M:MessageService.Controllers.UserController.GetArchiveForecasts(System.Int32,System.Int32)">
+            <summary>
+            Постраничная выборка пользователей
+            </summary>
+            <param name="limit"> Максимальное кол-во пользователей </param>
+            <param name="offset"> Порядковый номер пользователя, начиная с которого 
+            необходимо получать информацию (индексация с 0) </param>
+            <returns> Список пользователей </returns>
+        </member>
+        <member name="T:MessageService.Program">
+            <summary>
+            Класс с основной программой.
+            </summary>
+        </member>
+        <member name="M:MessageService.Program.Main(System.String[])">
+            <summary>
+            Точка входа в программу.
+            </summary>
+            <param name="args"> Массив строк </param>
+        </member>
+        <member name="M:MessageService.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Создание хоста.
+            </summary>
+            <param name="args"> Массив строк </param>
+            <returns> Постройщик хоста </returns>
+        </member>
+        <member name="T:MessageService.Repositories.IMessageRepository">
+            <summary>
+            Интерфейс для взаимодействия с хранилищем данных сообщений.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.IMessageRepository.GetRandomText">
+            <summary>
+            Создаёт новое сообщение и добавляет его в список.
+            </summary>
+            <returns> Новое случайное сообщение </returns>
+        </member>
+        <member name="M:MessageService.Repositories.IMessageRepository.GetAllMessages">
+            <summary>
+            Возвращает список всех сообщений.
+            </summary>
+            <returns> Список сообщений </returns>
+        </member>
+        <member name="M:MessageService.Repositories.IMessageRepository.ReadJsonFile">
+            <summary>
+            Читает json-файл и инициализирует список сообщений.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.IMessageRepository.WriteList">
+            <summary>
+            Записывает текущее состояние списка в json-файл.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.IMessageRepository.ClearList">
+            <summary>
+            Чистит список сообщений.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.IMessageRepository.IsUserRegistered(System.String)">
+            <summary>
+            Проверяет по идентификатору, зарегистрирован ли пользователь в хранилище данных.
+            </summary>
+            <param name="id"> Идентификатор пользователя </param>
+            <returns> <c>true</c>, если зарегистрирован, иначе <c>false</c> </returns>
+        </member>
+        <member name="M:MessageService.Repositories.IMessageRepository.GetText(MessageService.Text)">
+            <summary>
+            Добавляет новое сообщение в список.
+            </summary>
+            <param name="message"> Сообщение </param>
+        </member>
+        <member name="T:MessageService.Repositories.IUserRepository">
+            <summary>
+            Интерфейс для взаимодействия с хранилищем данных пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.IUserRepository.GetRandomUser">
+            <summary>
+            Создаёт нового пользователя и добавляет его в список.
+            </summary>
+            <returns> Нового случайного пользователя </returns>
+        </member>
+        <member name="M:MessageService.Repositories.IUserRepository.GetAllUsers">
+            <summary>
+            Возвращает список всех пользователей.
+            </summary>
+            <returns> Список пользователей </returns>
+        </member>
+        <member name="M:MessageService.Repositories.IUserRepository.ReadJsonFile">
+            <summary>
+            Читает json-файл и инициализирует список пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.IUserRepository.SortList">
+            <summary>
+            Сортирует список пользователей и записывает его текущее состояние в json-файл.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.IUserRepository.ClearList">
+            <summary>
+            Чистит список пользователей.
+            </summary>
+        </member>
+        <member name="T:MessageService.Repositories.MessageRepository">
+            <summary>
+            Класс хранилища данных сообщений.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.MessageRepository.FileNameMessage">
+            <summary>
+            Файл для хранения списка сообщений.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.MessageRepository.Random">
+            <summary>
+            Объект для генерации случайных чисел.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.MessageRepository.Emails">
+            <summary>
+            Список возможных почт для идентификатора отправителя и получателя.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.MessageRepository._listOfMessages">
+            <summary>
+            Список сообщений.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.GetAllMessages">
+            <summary>
+            Возвращает список всех сообщений.
+            </summary>
+            <returns> Список сообщений </returns>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.GetRandomText">
+            <summary>
+            Создаёт новое сообщение и добавляет его в список.
+            </summary>
+            <returns> Новое случайное сообщение </returns>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.ReadJsonFile">
+            <summary>
+            Читает json-файл и инициализирует список сообщений.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.WriteList">
+            <summary>
+            Записывает текущее состояние списка в json-файл.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.ClearList">
+            <summary>
+            Чистит список сообщений.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.IsUserRegistered(System.String)">
+            <summary>
+            Проверяет по идентификатору, зарегистрирован ли пользователь в хранилище данных.
+            </summary>
+            <param name="id"> Идентификатор пользователя </param>
+            <returns> <c>true</c>, если зарегистрирован, иначе <c>false</c> </returns>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.GetText(MessageService.Text)">
+            <summary>
+            Добавляет новое сообщение в список.
+            </summary>
+            <param name="message"> Сообщение </param>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.GetRandomSubject">
+            <summary>
+            Получает случайно сгенерированную тему сообщения (не осмысленную).
+            </summary>
+            <returns> Тему сообщения </returns>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.GetRandomMessage">
+            <summary>
+            Получает случайно сгенерированный текст сообщения (не осмысленный).
+            </summary>
+            <returns> Текст сообщения </returns>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.ReadUsersJson">
+            <summary>
+            Читает json-файл и получается список пользователей.
+            </summary>
+            <returns> Список пользователей </returns>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.FillEmails">
+            <summary>
+            Заполняет список возможными почтами (случайно сгенерированными с использованием 
+            генераторов из класса UserRepository или полученными из списка пользователей).
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.MessageRepository.GetSomeUserEmail">
+            <summary>
+            Возвращает случайную почту из списка возможных почт.
+            </summary>
+            <returns> Случайная почта </returns>
+        </member>
+        <member name="T:MessageService.Repositories.UserComparer">
+            <summary>
+            Класс объекта, который сравнивает пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.UserComparer.Compare(MessageService.User,MessageService.User)">
+            <summary>
+            Сравнение пользователей по значениям их идентификаторов.
+            </summary>
+            <param name="firstUser"> Первый пользователь </param>
+            <param name="secondUser"> Второй пользователь </param>
+            <returns></returns>
+        </member>
+        <member name="T:MessageService.Repositories.UserRepository">
+            <summary>
+            Класс хранилища данных пользователей.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.UserRepository.FileNameUser">
+            <summary>
+            Файл для хранения списка пользователей.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.UserRepository.Random">
+            <summary>
+            Объект для генерации случайных чисел.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.UserRepository.Emails">
+            <summary>
+            Словарь зарегистрированных почт.
+            </summary>
+        </member>
+        <member name="F:MessageService.Repositories.UserRepository._listOfUsers">
+            <summary>
+            Список пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.UserRepository.GetAllUsers">
+            <summary>
+            Возвращает список всех пользователей.
+            </summary>
+            <returns> Список пользователей </returns>
+        </member>
+        <member name="M:MessageService.Repositories.UserRepository.GetRandomUser">
+            <summary>
+            Создаёт нового пользователя и добавляет его в список.
+            </summary>
+            <returns> Нового случайного пользователя </returns>
+        </member>
+        <member name="M:MessageService.Repositories.UserRepository.ReadJsonFile">
+            <summary>
+            Читает json-файл и инициализирует список пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.UserRepository.SortList">
+            <summary>
+            Сортирует список пользователей и записывает его текущее состояние в json-файл.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.UserRepository.ClearList">
+            <summary>
+            Чистит список пользователей.
+            </summary>
+        </member>
+        <member name="M:MessageService.Repositories.UserRepository.GetRandomName">
+            <summary>
+            Получает случайно сгенерированное имя (не осмысленное).
+            </summary>
+            <returns> Имя пользователя </returns>
+        </member>
+        <member name="M:MessageService.Repositories.UserRepository.GetRandomEmail(System.String)">
+            <summary>
+            Получает случайно сгенерированное имя (довольно осмысленное).
+            </summary>
+            <param name="name"> Имя пользователя </param>
+            <returns> Идентификатор пользователя </returns>
+        </member>
+        <member name="T:MessageService.Text">
+            <summary>
+            Класс объекта сообщение.
+            </summary>
+        </member>
+        <member name="P:MessageService.Text.Subject">
+            <summary>
+            Тема сообщения.
+            </summary>
+        </member>
+        <member name="P:MessageService.Text.Message">
+            <summary>
+            Текст сообщения.
+            </summary>
+        </member>
+        <member name="P:MessageService.Text.SenderId">
+            <summary>
+            Идентификатор отправителя.
+            </summary>
+        </member>
+        <member name="P:MessageService.Text.ReceiverId">
+            <summary>
+            Идентификатор получателя.
+            </summary>
+        </member>
+        <member name="T:MessageService.User">
+            <summary>
+            Класс объекта пользователь.
+            </summary>
+        </member>
+        <member name="P:MessageService.User.UserName">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="P:MessageService.User.Email">
+            <summary>
+            Идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="T:MessageService.Startup">
+            <summary>
+            Класс стартапа.
+            </summary>
+        </member>
+        <member name="M:MessageService.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Конструктор стартапа.
+            </summary>
+            <param name="configuration"> Настройка конфигурации </param>
+        </member>
+        <member name="P:MessageService.Startup.Configuration">
+            <summary>
+            Конфигурация.
+            </summary>
+        </member>
+        <member name="M:MessageService.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Настройка служб.
+            </summary>
+            <param name="services"> Обслуживание </param>
+        </member>
+        <member name="M:MessageService.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Конфигурирует приложение.
+            </summary>
+            <param name="app"> Разработчик приложения </param>
+            <param name="env"> Среда веб-хостинга </param>
+        </member>
+    </members>
+</doc>
